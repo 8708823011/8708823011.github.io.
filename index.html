@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday Swati!</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      overflow: hidden;
+    }
+    h1 {
+      font-size: 3rem;
+      animation: glow 2s infinite alternate;
+    }
+    p {
+      font-size: 1.3rem;
+      max-width: 600px;
+      margin: 20px auto;
+    }
+    img {
+      width: 250px;
+      border-radius: 50%;
+      margin: 20px 0;
+      box-shadow: 0 0 15px #fff;
+    }
+    .code-box {
+      background-color: #1e1e1e;
+      padding: 20px;
+      border-radius: 10px;
+      font-family: monospace;
+      text-align: left;
+      margin-top: 30px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      width: 90%;
+      max-width: 600px;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #ff00ff; }
+      to { text-shadow: 0 0 20px #00ffff; }
+    }
+    .button {
+      background: #ff0080;
+      color: white;
+      padding: 12px 24px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      margin-top: 30px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .button:hover {
+      background: #ff66b2;
+    }
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="confetti"></canvas>
+  <h1>Happy Birthday, Swati!</h1>
+  <img src="swati.jpg" alt="Swati">
+  <p>Wishing you a day as amazing as your code — bug-free, beautifully written, and full of joy!</p>
+  <div class="code-box">
+    <code>
+      const swati = "Birthday Girl";<br>
+      const cake = true;<br>
+      const joy = "Unlimited";<br><br>
+      if (cake && swati) {<br>
+      &nbsp;&nbsp;console.log("Have a fantastic day, Swati!");<br>
+      }<br><br>
+      while (celebrating) {<br>
+      &nbsp;&nbsp;happiness++;<br>
+      &nbsp;&nbsp;memories.push("amazing moments");<br>
+      }
+    </code>
+  </div>
+  <button class="button" onclick="alert('You’re the best version ever compiled, Swati!')">Click Me!</button>
+  <audio autoplay loop>
+    <source src="birthday.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+  <script>
+    const canvas = document.getElementById('confetti');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    let confetti = [];
+    for (let i = 0; i < 150; i++) {
+      confetti.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 6 + 4,
+        d: Math.random() * 10 + 2,
+        color: `hsl(${Math.random() * 360}, 100%, 70%)`,
+        tilt: Math.random() * 10 - 10,
+        tiltAngle: 0
+      });
+    }
+    function drawConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < confetti.length; i++) {
+        let c = confetti[i];
+        ctx.beginPath();
+        ctx.lineWidth = c.r;
+        ctx.strokeStyle = c.color;
+        ctx.moveTo(c.x + c.tilt + c.r / 2, c.y);
+        ctx.lineTo(c.x + c.tilt, c.y + c.tilt + c.r / 2);
+        ctx.stroke();
+      }
+      updateConfetti();
+    }
+    function updateConfetti() {
+      for (let i = 0; i < confetti.length; i++) {
+        let c = confetti[i];
+        c.y += Math.cos(c.d) + 1 + c.r / 2;
+        c.x += Math.sin(c.d);
+        c.tiltAngle += 0.1;
+        c.tilt = Math.sin(c.tiltAngle) * 15;
+        if (c.y > canvas.height) {
+          c.y = -10;
+          c.x = Math.random() * canvas.width;
+        }
+      }
+    }
+    function animateConfetti() {
+      drawConfetti();
+      requestAnimationFrame(animateConfetti);
+    }
+    animateConfetti();
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>
